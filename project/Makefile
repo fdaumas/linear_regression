@@ -9,11 +9,11 @@ RM								=	rm -rf
 #	FILE & PATH
 HEADER						= lib/LinearRegression.hpp
 
-SRCS_TRAIN				= 	src/main.cpp \
+SRCS_TRAIN				= 	src/mainTrain.cpp \
 											lib/LinearRegression.cpp \
 											src/normalize.cpp
 
-SRCS_ESTIMATE			= 	src/main.cpp \
+SRCS_ESTIMATE			= 	src/mainEstimate.cpp \
 											lib/LinearRegression.cpp \
 											src/normalize.cpp
 
@@ -27,7 +27,7 @@ OBJS_TRAIN				=	$(addprefix $(DIR_OBJS_TRAIN)/,$(LST_OBJS_TRAIN))
 OBJS_ESTIMATE			=	$(addprefix $(DIR_OBJS_ESTIMATE)/,$(LST_OBJS_ESTIMATE))
 
 
-all:								${NAME_TRAIN} ${NAME_ESTIMATE}
+all:								${NAME_TRAIN} ${NAME_ESTIMATE} params
 
 ${NAME_TRAIN}:			${OBJS_TRAIN}
 			$(CC) $(CFLAGS) $^ -o $@
@@ -47,6 +47,10 @@ $(DIR_OBJS_TRAIN):
 $(DIR_OBJS_ESTIMATE):
 			mkdir -p $(DIR_OBJS_ESTIMATE)/src $(DIR_OBJS_ESTIMATE)/lib
 
+params: 
+	$(RM) ./csv/params.csv
+	echo 'learningRate,theta0,teta1\n0.5,0,0' > ./csv/params.csv
+
 clean:
 			$(RM) .objs
 
@@ -55,4 +59,4 @@ fclean:				clean
 
 re:					fclean all
 
-.PHONY:		all clean fclean re bonus
+.PHONY:		all clean fclean re bonus params

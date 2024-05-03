@@ -36,4 +36,6 @@ class LinearRegression {
     std::vector<t_dataset> dataset;
     t_minMax mileageMinMax;
     t_minMax priceMinMax;
+
+    void saveTraining(double t0, double t1);
 };

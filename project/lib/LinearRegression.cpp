@@ -39,7 +39,7 @@ void LinearRegression::showDatasetAndParams() {
 }
 
 void LinearRegression::loadDataset() {
-  std::ifstream file("data.csv");
+  std::ifstream file("./csv/data.csv");
   std::string tmp;
 
   std::getline(file, tmp);
@@ -70,7 +70,7 @@ void LinearRegression::loadDataset() {
 }
 
 void LinearRegression::loadParams() {
-  std::ifstream file("params.csv");
+  std::ifstream file("./csv/params.csv");
   std::string tmp;
 
   std::getline(file, tmp);
@@ -111,4 +111,10 @@ void LinearRegression::update() {
     theta0 -= (learningRate * (1.0 / dataset.size()) * tmp_theta0);
     theta1 -= (learningRate * (1.0 / dataset.size()) * tmp_theta1);
   }
+  saveTraining(theta0, theta1);
+}
+
+void LinearRegression::saveTraining(double t0, double t1) {
+  std::ofstream file("./csv/params.csv");
+  file << "learningRate,theta0,teta1\n" << 0.5 << "," << t0 << "," << t1 << std::endl;
 }
