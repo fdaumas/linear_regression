@@ -87,6 +87,7 @@ double LinearRegression::estimatePrice(double mileage) {
 }
 
 double LinearRegression::realEstimatePrice(double mileage) {
+  if (theta0 == 0.0 || theta1 == 0.0) return 0;
   double mileageNormalized = normalize(mileage, mileageMinMax.min, mileageMinMax.max);
 
   return reverseNormalize(estimatePrice(mileageNormalized), priceMinMax.min, priceMinMax.max);
